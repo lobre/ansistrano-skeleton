@@ -1,0 +1,3 @@
+- src: carlosbuenosvinos.ansistrano-deploy
+- src: carlosbuenosvinos.ansistrano-rollback
+- src: https://github.com/loric-/ansistrano-package.git

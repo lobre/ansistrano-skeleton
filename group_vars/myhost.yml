@@ -1,0 +1,9 @@
+---
+# Base path to deploy to
+ansistrano_deploy_to: "/var/www/html"
+
+# What version of the repository to check out
+ansistrano_git_branch: master
+
+# Env cleaner code
+ansistrano_env_cleaner_code: "MYHOST"

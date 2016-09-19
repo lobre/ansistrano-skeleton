@@ -1,0 +1,44 @@
+---
+# Path where the code must be packaged
+ansistrano_package: "{{ lookup('env','HOME') }}/.ansistrano/myproject"
+
+# Git variables
+ansistrano_git_repo: git@git.myproject.fr
+ansistrano_git_branch: master
+
+# Method used to deliver the code to the server
+ansistrano_deploy_via: "rsync"
+
+# Where my local project is
+ansistrano_deploy_from: "{{ ansistrano_package }}/package/"
+
+# Releases to keep after a new deployment
+ansistrano_keep_releases: 3
+
+# Anonymous stats for Ansistrano team
+ansistrano_allow_anonymous_stats: no
+
+# Shared paths to symlink to release dir
+ansistrano_shared_paths:
+  - "www/media"
+  - "www/var"
+
+# Unwanted paths
+ansistrano_unwanted_paths:
+  - ".git"
+  - ".gitignore"
+  - ".idea"
+  - "scripts"
+  - "www/media"
+  - "www/var"
+  - "build"
+  - "tests"
+  - "deploy"
+
+# Env cleaner
+ansistrano_env_cleaner_wrap_char: "__"
+# Mode of env cleaner
+# 0 is code at the beginning of filename
+# 1 is code just before extension
+# 2 is code at the end of filename
+ansistrano_env_cleaner_mode: 2
