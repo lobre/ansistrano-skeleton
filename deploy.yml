@@ -1,6 +1,6 @@
 ---
 - name: ANSISTRANO | Package
-  hosts: 127.0.0.1
+  hosts: localhost
   connection: local
 
   pre_tasks:
