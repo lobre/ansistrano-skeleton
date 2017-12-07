@@ -3,6 +3,14 @@
   hosts: all
   connection: local
 
+  vars_prompt: 
+    - name: "git_user" 
+      prompt: "Enter your git username" 
+      private: no
+    - name: "git_password" 
+      prompt: "Enter your git password" 
+      private: yes
+
   pre_tasks:
     - name: ANSISTRANO | Set git tag if defined in ansible command
       set_fact:

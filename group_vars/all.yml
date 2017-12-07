@@ -3,8 +3,7 @@
 ansistrano_package: "{{ lookup('env','HOME') }}/.ansistrano/myproject"
 
 # Git variables
-ansistrano_git_repo: git@git.myproject.fr
-ansistrano_git_branch: master
+ansistrano_git_repo: https://{{ git_user | urlencode }}:{{ git_password }}@giturl.git
 
 # Method used to deliver the code to the server
 ansistrano_deploy_via: "rsync"
@@ -20,20 +19,20 @@ ansistrano_allow_anonymous_stats: no
 
 # Shared paths to symlink to release dir
 ansistrano_shared_paths:
-  - "www/media"
-  - "www/var"
+  - "web/app/uploads"
+  - "vendor"
 
 # Unwanted paths
 ansistrano_unwanted_paths:
   - ".git"
   - ".gitignore"
-  - ".idea"
-  - "scripts"
-  - "www/media"
-  - "www/var"
-  - "build"
-  - "tests"
+  - "CHANGELOG.md"
+  - "LICENSE.md"
+  - "README.md"
+  - "sql"
   - "deploy"
+  - "web/app/uploads"
+  - "vendor"
 
 # Env cleaner
 ansistrano_env_cleaner_wrap_char: "__"

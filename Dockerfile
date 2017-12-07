@@ -1,23 +1,42 @@
-FROM python:2
+FROM alpine:3.6
 
-MAINTAINER Loric Brevet <lobre@smile.fr>
+RUN set -x && \
+	    addgroup -S deploy && \
+	    adduser -D -S -G deploy deploy && \
 
-RUN apt-get update \
-    && apt-get install -y \
-    vim \
-    rsync \
-    ssh \
-    git \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+	apk add --no-cache --virtual .build-deps \
+        python-dev \
+        libffi-dev \
+        openssl-dev \
+        build-base && \
+
+    apk add --no-cache \
+        python \
+        py-pip \
+        openssl \
+        ca-certificates \
+        sshpass \
+        vim \
+        rsync \
+        openssh-client \
+        git
 
 RUN pip install --no-cache-dir ansible
 
-VOLUME ["/deploy"]
-VOLUME ["/root"]
+COPY ansible.cfg /etc/ansible/ansible.cfg
+
+RUN apk del .build-deps && \
+    rm -rf /var/cache/apk/*
+
+RUN mkdir /deploy && chown deploy:deploy /deploy
+
+USER deploy
 
 WORKDIR "/deploy"
 
-ADD ["docker-cmd.sh", "/tmp/"]
+COPY --chown=deploy:deploy . /deploy
 
-CMD bash -c "/tmp/docker-cmd.sh";"bash"
+RUN ansible-galaxy install -p roles -r requirements.yml && \
+    mkdir /home/deploy/.ansistrano
+
+CMD ash

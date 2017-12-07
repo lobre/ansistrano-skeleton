@@ -1,2 +1,2 @@
 [myhost]
-myhost ansible_user=myuser ansible_host=10.0.0.1 ansible_port=22
+myhost1 ansible_user=myuser ansible_host=10.0.0.1 ansible_port=22

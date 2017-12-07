@@ -3,7 +3,10 @@
 ansistrano_deploy_to: "/var/www/html"
 
 # What version of the repository to check out
-ansistrano_git_branch: master
+ansistrano_git_branch: dev
 
 # Env cleaner code
-ansistrano_env_cleaner_code: "MYHOST"
+ansistrano_env_cleaner_code: "myhost"
+
+# Hooks
+ansistrano_after_symlink_tasks_file: "{{ playbook_dir }}/hooks/before-symlink-tasks.yml"
