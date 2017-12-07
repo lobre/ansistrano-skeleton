@@ -7,6 +7,7 @@ ansistrano_git_repo: https://{{ git_user | urlencode }}:{{ git_password }}@gitur
 
 # Method used to deliver the code to the server
 ansistrano_deploy_via: "rsync"
+ansistrano_rsync_set_remote_user: yes
 
 # Where my local project is
 ansistrano_deploy_from: "{{ ansistrano_package }}/package/"
